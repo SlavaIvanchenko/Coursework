@@ -18,14 +18,14 @@ const getItems = (request, response) => {
 };
 
 const addItem = (request, response) => {
-  const car_numbers = request.body.car_numbers;
-  const car_model = request.body.car_model;
+  const numbers = request.body.numbers;
+  const model = request.body.model;
   const id = request.body.id;
   pool.connect((err, client) => {
     if (err) {
       return response.status(400).send(err);
     } else {
-      client.query('INSERT INTO cars (cars_numbers, cars_model, id) VALUES($1, $2, $3)', [car_numbers, car_model, id], (err, results) => {
+      client.query('INSERT INTO cars (numbers, model, id) VALUES($1, $2, $3)', [numbers, model, id], err => {
         if (err) {
           return response.status(400).send(err);
         } else {
@@ -42,7 +42,7 @@ const deleteItem = (request, response) => {
     if (err) {
       return response.status(400).send(err);
     } else {
-      client.query('DELETE FROM cars WHERE id = $1', [parseInt(id)], (err, results) => {
+      client.query('DELETE FROM cars WHERE id = $1', [parseInt(id)], err => {
         if (err) {
           return response.status(400).send(err);
         } else {

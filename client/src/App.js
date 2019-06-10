@@ -36,10 +36,10 @@ class App extends React.Component {
     this.count+=1;
     const that = this;
     event.preventDefault();
-    let car_data = {
+    let data = {
       id: this.count,
-      car_numbers: this.refs.car_numbers.value,
-      car_model: this.refs.car_model.value
+      numbers: this.refs.numbers.value,
+      model: this.refs.model.value
     };
 
     const request = new Request('http://localhost:3000/cars/post', {
@@ -47,11 +47,11 @@ class App extends React.Component {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(car_data)
+      body: JSON.stringify(data)
     });
 
     let cars = that.state.cars;
-    cars.push(car_data);
+    cars.push(data);
     that.setState({
       cars
     });
@@ -98,13 +98,13 @@ class App extends React.Component {
       <div className = "App" >
         <h1> {title} </h1> 
           <form ref = "carForm">
-            <input type = "text" ref = "car_numbers" placeholder = "numbers" / >
-            <input type = "text" ref = "car_model" placeholder = "model" />
+            <input type = "text" ref = "numbers" placeholder = "numbers" / >
+            <input type = "text" ref = "model" placeholder = "model" />
             <button onClick = {this.addItem.bind(this)}> Add </button> 
           </form> 
           <ul> 
             {cars.map(car => ( 
-              <li key = {car.id}> {car.car_numbers} {car.car_model} {' '} 
+              <li key = {car.id}> {car.numbers} {car.model} {' '} 
                 <button onClick = {this.removeItem.bind(this, car.id)}> 
                   {' '}
                   Remove 
