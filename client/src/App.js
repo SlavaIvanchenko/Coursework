@@ -50,7 +50,7 @@ class App extends React.Component {
       body: JSON.stringify(data)
     });
 
-    let cars = that.state.cars;
+    let cars = this.state.cars;
     cars.push(data);
     that.setState({
       cars
